@@ -1,6 +1,31 @@
 import type { GatsbyNode } from "gatsby";
 import type { GetPodcastTranscriptsResult } from "./src/types";
 import path from "path";
+import https from "https";
+import fs from "fs";
+
+export const onPreInit: GatsbyNode["onPreInit"] = () => {
+  const environment = process.env.ENV || "dev";
+  const is_prod = environment == "prod";
+
+  // Only download in prod
+  if (is_prod) {
+    const url = process.env.DATA_FILE_URL || "";
+    const filePath = "./data/podcast-transcripts.json";
+    // Create the folder if it doesn't exist
+    if (!fs.existsSync("./data")) {
+      fs.mkdirSync("./data");
+    }
+    const file = fs.createWriteStream(filePath);
+    const request = https.get(url, (response) => {
+      response.pipe(file);
+      file
+        .on("finish", () => file.close())
+        .on("error", (err) => fs.unlink(filePath, (err) => {}));
+    });
+    console.log("Downloaded");
+  }
+};
 
 export const createPages: GatsbyNode["createPages"] = async ({
   actions: { createPage },
