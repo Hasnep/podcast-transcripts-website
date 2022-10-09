@@ -6,3 +6,9 @@ src/gatsby-types.d.ts
 
 # Data
 data/
+
+# Environment files
+.env
+
+# Local Netlify folder
+.netlify
