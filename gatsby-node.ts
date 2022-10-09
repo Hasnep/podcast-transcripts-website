@@ -10,6 +10,7 @@ export const onPreInit: GatsbyNode["onPreInit"] = () => {
 
   // Only download in prod
   if (is_prod) {
+    console.log("Downloading data.");
     const url = process.env.DATA_FILE_URL || "";
     const filePath = "./data/podcast-transcripts.json";
     // Create the folder if it doesn't exist
@@ -23,7 +24,9 @@ export const onPreInit: GatsbyNode["onPreInit"] = () => {
         .on("finish", () => file.close())
         .on("error", (err) => fs.unlink(filePath, (err) => {}));
     });
-    console.log("Downloaded");
+    console.log("Downloaded data.");
+  } else {
+    console.log("Skipping download.");
   }
 };
 
