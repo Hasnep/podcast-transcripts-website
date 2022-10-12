@@ -18,7 +18,7 @@ export const onPreInit: GatsbyNode["onPreInit"] = () => {
       fs.mkdirSync("./data");
     }
     const file = fs.createWriteStream(filePath);
-    const request = https.get(url, (response) => {
+    https.get(url, (response) => {
       response.pipe(file);
       file
         .on("finish", () => file.close())
