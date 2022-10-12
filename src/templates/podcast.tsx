@@ -1,12 +1,23 @@
 import * as React from "react";
-import { HeadFC, Link } from "gatsby";
+import { HeadFC, Link, graphql } from "gatsby";
 import "../styles.scss";
 import { PageProps } from "gatsby";
-import { Podcast } from "../types";
-import { compareStrings } from "../utils";
+import { GetPodcastTranscriptsResult } from "../types";
+import { compareStrings, findOrError } from "../utils";
 
-const PodcastPage = ({ pageContext }: PageProps) => {
-  const podcast: Podcast = pageContext.podcast;
+type PodcastPageContext = { podcastId: String };
+
+const PodcastPage = ({
+  data: {
+    dataJson: { podcasts },
+  },
+  pageContext,
+}: PageProps<GetPodcastTranscriptsResult, PodcastPageContext>) => {
+  const podcast = findOrError(
+    podcasts,
+    (p) => p.podcast_id == pageContext.podcastId,
+    `Podcast with ID '${pageContext.podcastId}' could not be found.`
+  );
   return (
     <>
       <h1>{podcast.podcast_title}</h1>
@@ -33,5 +44,27 @@ const PodcastPage = ({ pageContext }: PageProps) => {
 };
 
 export default PodcastPage;
+
+export const query = graphql`
+  {
+    dataJson {
+      podcasts {
+        podcast_id
+        podcast_title
+        episodes {
+          episode_title
+          episode_slug
+          published
+          transcript {
+            segments {
+              text
+              timestamp
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export const Head: HeadFC = () => <title>Podcast Page</title>;

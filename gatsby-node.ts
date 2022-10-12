@@ -72,18 +72,21 @@ export const createPages: GatsbyNode["createPages"] = async ({
     createPage({
       path: `/podcasts/${podcast.podcast_id}`,
       component: path.resolve("./src/templates/podcast.tsx"),
-      context: { podcast: podcast },
+      context: { podcastId: podcast.podcast_id },
     });
     createPage({
       path: `/podcasts/${podcast.podcast_id}/all-episodes`,
       component: path.resolve("./src/templates/all-episodes.tsx"),
-      context: { podcast: podcast },
+      context: { podcastId: podcast.podcast_id },
     });
     podcast.episodes.forEach((episode) => {
       createPage({
         path: `/podcasts/${podcast.podcast_id}/episodes/${episode.episode_slug}`,
         component: path.resolve("./src/templates/episode.tsx"),
-        context: { podcast: podcast, episode: episode },
+        context: {
+          podcastId: podcast.podcast_id,
+          episodeSlug: episode.episode_slug,
+        },
       });
     });
   });
