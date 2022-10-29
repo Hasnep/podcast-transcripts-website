@@ -11,7 +11,7 @@ const IndexPage = ({
   },
 }: PageProps<GetPodcastTranscriptsResult>) => {
   return (
-    <>
+    <main>
       <h1>hi</h1>
       <ul>
         {podcasts
@@ -24,7 +24,7 @@ const IndexPage = ({
             </li>
           ))}
       </ul>
-    </>
+    </main>
   );
 };
 

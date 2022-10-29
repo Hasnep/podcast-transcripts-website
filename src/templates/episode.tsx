@@ -24,7 +24,7 @@ const EpisodePage = ({
     `Episode with slug '${pageContext.episodeSlug}' could not be found.`
   );
   return (
-    <>
+    <main>
       <h1>{podcast.podcast_title}</h1>
       <h2>{episode.episode_title}</h2>
       <>
@@ -36,7 +36,7 @@ const EpisodePage = ({
             </p>
           ))}
       </>
-    </>
+    </main>
   );
 };
 

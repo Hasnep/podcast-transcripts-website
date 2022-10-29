@@ -19,7 +19,7 @@ const AllEpisodesPage = ({
     `Podcast with ID '${pageContext.podcastId}' could not be found.`
   );
   return (
-    <>
+    <main>
       <h1>{podcast.podcast_title}</h1>
       {podcast.episodes
         .sort((a, b) => compareStrings(b.published, a.published))
@@ -43,7 +43,7 @@ const AllEpisodesPage = ({
             </ul>
           </>
         ))}
-    </>
+    </main>
   );
 };
 

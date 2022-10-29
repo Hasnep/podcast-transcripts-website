@@ -19,7 +19,7 @@ const PodcastPage = ({
     `Podcast with ID '${pageContext.podcastId}' could not be found.`
   );
   return (
-    <>
+    <main>
       <h1>{podcast.podcast_title}</h1>
       <p>
         <Link to={`/podcasts/${podcast.podcast_id}/all-episodes`}>
@@ -39,7 +39,7 @@ const PodcastPage = ({
             </li>
           ))}
       </ul>
-    </>
+    </main>
   );
 };
 
