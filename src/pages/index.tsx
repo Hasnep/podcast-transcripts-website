@@ -17,8 +17,8 @@ const IndexPage = ({
     <h1>{siteTitle}</h1>
     <h2>About</h2>
     <p>
-      A an <a href={"#source-code"}>open source</a> website with automatically
-      generated transcripts of podcasts. Uses{" "}
+      A an open source website with automatically generated transcripts of
+      podcasts. Uses{" "}
       <a href={"https://openai.com/blog/whisper/"}>OpenAI's Whisper</a> for
       transcription.
     </p>
