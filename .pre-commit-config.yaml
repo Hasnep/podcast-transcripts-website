@@ -55,10 +55,10 @@ repos:
         id: prettier
         types: [markdown]
 
-  # Javascript
+  # JavaScript
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.0.0-alpha.1
     hooks:
-      - name: Format Javascript files
+      - name: Format JavaScript files
         id: prettier
         types_or: [javascript, jsx, ts, tsx]
