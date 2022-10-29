@@ -34,7 +34,7 @@ const IndexPage = ({
           </li>
         ))}
     </ul>
-    <h2 id={"source-code"}>Source Code</h2>
+    <h2>Source Code</h2>
     This website and the software that transcribes the podcasts are completely
     free and open source. The copyright of the podcasts are owned by their
     original creators.
