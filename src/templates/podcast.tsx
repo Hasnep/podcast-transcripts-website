@@ -15,14 +15,14 @@ const PodcastPage = ({
 }: PageProps<GetPodcastTranscriptsResult, PodcastPageContext>) => {
   const podcast = findOrError(
     podcasts,
-    (p) => p.podcast_id == pageContext.podcastId,
-    `Podcast with ID '${pageContext.podcastId}' could not be found.`
+    (p) => p.podcastId == pageContext.podcastId,
+    `Podcast with ID '${pageContext.podcastId}' could not be found.`,
   );
   return (
     <main>
-      <h1>{podcast.podcast_title}</h1>
+      <h1>{podcast.podcastTitle}</h1>
       <p>
-        <Link to={`/podcasts/${podcast.podcast_id}/all-episodes`}>
+        <Link to={`/podcasts/${podcast.podcastId}/all-episodes`}>
           All episodes
         </Link>
       </p>
@@ -32,9 +32,9 @@ const PodcastPage = ({
           .map((episode) => (
             <li>
               <Link
-                to={`/podcasts/${podcast.podcast_id}/episodes/${episode.episode_slug}`}
+                to={`/podcasts/${podcast.podcastId}/episodes/${episode.slug}`}
               >
-                {episode.episode_title}
+                {episode.episodeTitle}
               </Link>
             </li>
           ))}
@@ -49,11 +49,11 @@ export const query = graphql`
   {
     dataJson {
       podcasts {
-        podcast_id
-        podcast_title
+        podcastId: podcast_id
+        podcastTitle: podcast_title
         episodes {
-          episode_title
-          episode_slug
+          episodeTitle: episode_title
+          slug: episode_slug
           published
           transcript {
             segments {

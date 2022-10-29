@@ -15,18 +15,18 @@ const EpisodePage = ({
 }: PageProps<GetPodcastTranscriptsResult, EpisodePageContext>) => {
   const podcast = findOrError(
     podcasts,
-    (p) => p.podcast_id == pageContext.podcastId,
-    `Podcast with ID '${pageContext.podcastId}' could not be found.`
+    (p) => p.podcastId == pageContext.podcastId,
+    `Podcast with ID '${pageContext.podcastId}' could not be found.`,
   );
   const episode = findOrError(
     podcast.episodes,
-    (e) => e.episode_slug == pageContext.episodeSlug,
-    `Episode with slug '${pageContext.episodeSlug}' could not be found.`
+    (e) => e.slug == pageContext.episodeSlug,
+    `Episode with slug '${pageContext.episodeSlug}' could not be found.`,
   );
   return (
     <main>
-      <h1>{podcast.podcast_title}</h1>
-      <h2>{episode.episode_title}</h2>
+      <h1>{podcast.podcastTitle}</h1>
+      <h2>{episode.episodeTitle}</h2>
       <>
         {episode.transcript.segments
           .sort((a, b) => compareStrings(a.timestamp, b.timestamp))
@@ -46,11 +46,11 @@ export const query = graphql`
   {
     dataJson {
       podcasts {
-        podcast_id
-        podcast_title
+        podcastId: podcast_id
+        podcastTitle: podcast_title
         episodes {
-          episode_title
-          episode_slug
+          episodeTitle: episode_title
+          slug: episode_slug
           published
           transcript {
             segments {

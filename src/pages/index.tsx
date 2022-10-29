@@ -15,11 +15,11 @@ const IndexPage = ({
       <h1>hi</h1>
       <ul>
         {podcasts
-          .sort((a, b) => compareStrings(a.podcast_title, b.podcast_title))
+          .sort((a, b) => compareStrings(a.podcastTitle, b.podcastTitle))
           .map((podcast) => (
             <li>
-              <Link to={`podcasts/${podcast.podcast_id}`}>
-                {podcast.podcast_title}
+              <Link to={`podcasts/${podcast.podcastId}`}>
+                {podcast.podcastTitle}
               </Link>
             </li>
           ))}
@@ -32,11 +32,11 @@ export const query = graphql`
   {
     dataJson {
       podcasts {
-        podcast_id
-        podcast_title
+        podcastId: podcast_id
+        podcastTitle: podcast_title
         episodes {
-          episode_title
-          episode_slug
+          episodeTitle: episode_title
+          slug: episode_slug
           published
           transcript {
             segments {

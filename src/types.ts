@@ -4,8 +4,8 @@ export type Segment = {
 };
 
 export type Episode = {
-  episode_title: string;
-  episode_slug: string;
+  episodeTitle: string;
+  slug: string;
   published: string;
   transcript: {
     segments: Segment[];
@@ -13,8 +13,8 @@ export type Episode = {
 };
 
 export type Podcast = {
-  podcast_id: string;
-  podcast_title: string;
+  podcastId: string;
+  podcastTitle: string;
   episodes: Episode[];
 };
 

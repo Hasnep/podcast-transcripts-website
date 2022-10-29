@@ -8,14 +8,14 @@ export const createPages: GatsbyNode["createPages"] = async ({
 }) => {
   const results: { data?: GetPodcastTranscriptsResult; errors?: any } =
     await graphql(`
-      query getPodcasts {
+      {
         dataJson {
           podcasts {
-            podcast_id
-            podcast_title
+            podcastId: podcast_id
+            podcastTitle: podcast_title
             episodes {
-              episode_title
-              episode_slug
+              episodeTitle: episode_title
+              slug: episode_slug
               published
               transcript {
                 segments {
@@ -30,22 +30,22 @@ export const createPages: GatsbyNode["createPages"] = async ({
     `);
   results.data?.dataJson.podcasts.forEach((podcast) => {
     createPage({
-      path: `/podcasts/${podcast.podcast_id}`,
+      path: `/podcasts/${podcast.podcastId}`,
       component: path.resolve("./src/templates/podcast.tsx"),
-      context: { podcastId: podcast.podcast_id },
+      context: { podcastId: podcast.podcastId },
     });
     createPage({
-      path: `/podcasts/${podcast.podcast_id}/all-episodes`,
+      path: `/podcasts/${podcast.podcastId}/all-episodes`,
       component: path.resolve("./src/templates/all-episodes.tsx"),
-      context: { podcastId: podcast.podcast_id },
+      context: { podcastId: podcast.podcastId },
     });
     podcast.episodes.forEach((episode) => {
       createPage({
-        path: `/podcasts/${podcast.podcast_id}/episodes/${episode.episode_slug}`,
+        path: `/podcasts/${podcast.podcastId}/episodes/${episode.slug}`,
         component: path.resolve("./src/templates/episode.tsx"),
         context: {
-          podcastId: podcast.podcast_id,
-          episodeSlug: episode.episode_slug,
+          podcastId: podcast.podcastId,
+          episodeSlug: episode.slug,
         },
       });
     });
