@@ -3,7 +3,7 @@ import { GetPodcastTranscriptsResult } from "../types";
 import { HeadFC, Link, graphql } from "gatsby";
 import "../styles.scss";
 import { PageProps } from "gatsby";
-import { compareStrings, findOrError } from "../utils";
+import { compareStrings, getPodcastFromId } from "../utils";
 
 type AllEpisodesPageContext = { podcastId: string };
 
@@ -13,11 +13,7 @@ const AllEpisodesPage = ({
   },
   pageContext,
 }: PageProps<GetPodcastTranscriptsResult, AllEpisodesPageContext>) => {
-  const podcast = findOrError(
-    podcasts,
-    (p) => p.podcastId == pageContext.podcastId,
-    `Podcast with ID '${pageContext.podcastId}' could not be found.`,
-  );
+  const podcast = getPodcastFromId(podcasts, pageContext.podcastId);
   return (
     <main>
       <h1>{podcast.podcastTitle}</h1>
