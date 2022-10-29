@@ -65,6 +65,18 @@ const IndexPage = ({
         <a href="https://github.com/openai/whisper/blob/main/LICENSE">MIT</a>
       </li>
     </ul>
+    <h2>Inspirations</h2>
+    <p>This project is inspired by similar projects</p>
+    <ul>
+      <li>
+        <a href="http://podcastsearch.david-smith.org">
+          David Smith's Podcast Search
+        </a>
+      </li>
+      <li>
+        <a href="https://karpathy.ai/lexicap/">Andrej Karpathy's Lexicap</a>
+      </li>
+    </ul>
   </main>
 );
 
