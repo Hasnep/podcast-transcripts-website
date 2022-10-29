@@ -1,11 +1,13 @@
-// import * as React from "react";
-// import { HeadFC } from "gatsby";
-// import "../styles.scss";
+import * as React from "react";
+import { HeadFC } from "gatsby";
+import "./styles.scss";
 
-// const FourOhFourPage = () => {
-//   return <h1>404</h1>;
-// };
+const FourOhFourPage = () => (
+  <main>
+    <h1>404 — Page not found</h1>
+  </main>
+);
 
-// export default FourOhFourPage;
+export default FourOhFourPage;
 
-// export const Head: HeadFC = () => <title>Page not found</title>;
+export const Head: HeadFC = () => <title>404 — Page not found</title>;
