@@ -40,39 +40,27 @@ const IndexPage = ({
     original creators.
     <ul>
       <li>
-        <a href={"https://github.com/podcast-transcripts/podcast-transcriber"}>
+        <a href="https://github.com/podcast-transcripts/podcast-transcriber">
           Source code
         </a>{" "}
         for the podcast scraper, downloader and transcriber —{" "}
-        <a
-          href={
-            "https://github.com/podcast-transcripts/podcast-transcriber/blob/main/LICENCE"
-          }
-        >
+        <a href="https://github.com/podcast-transcripts/podcast-transcriber/blob/main/LICENCE">
           GPL-3
         </a>
       </li>
       <li>
-        <a
-          href={
-            "https://github.com/podcast-transcripts/podcast-transcripts-website"
-          }
-        >
+        <a href="https://github.com/podcast-transcripts/podcast-transcripts-website">
           Source code
         </a>{" "}
         for the website you're reading now —{" "}
-        <a
-          href={
-            "https://github.com/podcast-transcripts/podcast-transcripts-website/blob/main/LICENCE"
-          }
-        >
+        <a href="https://github.com/podcast-transcripts/podcast-transcripts-website/blob/main/LICENCE">
           GPL-3
         </a>
       </li>
       <li>
-        <a href={"https://github.com/openai/whisper"}>Source code</a> for
-        OpenAI's Whisper which is used for speech-to-text —{" "}
-        <a href={"https://github.com/openai/whisper/blob/main/LICENSE"}>MIT</a>
+        <a href="https://github.com/openai/whisper">Source code</a> for OpenAI's
+        Whisper which is used for speech-to-text —{" "}
+        <a href="https://github.com/openai/whisper/blob/main/LICENSE">MIT</a>
       </li>
     </ul>
   </main>
