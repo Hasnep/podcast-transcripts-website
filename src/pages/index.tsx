@@ -18,9 +18,8 @@ const IndexPage = ({
     <h2>About</h2>
     <p>
       An open source website with automatically generated transcripts of
-      podcasts. Uses{" "}
-      <a href={"https://openai.com/blog/whisper/"}>OpenAI's Whisper</a> for
-      transcription.
+      podcasts. The transcripts are far from perfect, but they're close enough
+      to help you find which episode something was talked about.
     </p>
     <h2>Podcasts</h2>
     <ul>
@@ -60,8 +59,9 @@ const IndexPage = ({
         </a>
       </li>
       <li>
-        <a href="https://github.com/openai/whisper">Source code</a> for OpenAI's
-        Whisper which is used for speech-to-text —{" "}
+        <a href="https://github.com/openai/whisper">Source code</a> for{" "}
+        <a href="https://openai.com/blog/whisper/">OpenAI's Whisper</a> which is
+        used for speech-to-text —{" "}
         <a href="https://github.com/openai/whisper/blob/main/LICENSE">MIT</a>
       </li>
     </ul>
