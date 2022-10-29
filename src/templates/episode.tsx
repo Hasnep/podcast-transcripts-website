@@ -5,7 +5,7 @@ import { PageProps } from "gatsby";
 import { GetPodcastTranscriptsResult } from "../types";
 import { compareStrings, findOrError } from "../utils";
 
-type EpisodePageContext = { podcastId: String; episodeSlug: String };
+type EpisodePageContext = { podcastId: string; episodeSlug: string };
 
 const EpisodePage = ({
   data: {

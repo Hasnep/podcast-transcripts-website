@@ -5,7 +5,7 @@ import "../styles.scss";
 import { PageProps } from "gatsby";
 import { compareStrings, findOrError } from "../utils";
 
-type AllEpisodesPageContext = { podcastId: String };
+type AllEpisodesPageContext = { podcastId: string };
 
 const AllEpisodesPage = ({
   data: {
