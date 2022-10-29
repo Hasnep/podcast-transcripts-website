@@ -1,0 +1,64 @@
+name: Build and publish
+
+on:
+  # Build on all pull requests
+  pull_request:
+  # Publish on push to main
+  push:
+    branches:
+      - main
+
+env:
+  NODE_ENV: production
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+      - name: Install Node dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Download data
+        run: curl --create-dirs --output ./data/podcast-transcripts.json ${{ secrets.DATA_FILE_URL }}
+      - name: Build the site
+        run: npm run build
+      - name: Upload build output
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: ./public
+
+  publish:
+    name: Publish
+    # Only run on push to main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Download build output
+        uses: actions/download-artifact@v3
+        with:
+          name: build-output
+          path: ./public
+      - name: Publish to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          production-branch: main
+          production-deploy: true
+          publish-dir: ./public
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: Deploy from GitHub Actions
+          fails-without-credentials: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
