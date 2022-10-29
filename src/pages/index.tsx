@@ -46,7 +46,7 @@ const IndexPage = ({
         for the podcast scraper, downloader and transcriber —{" "}
         <a
           href={
-            "https://github.com/podcast-transcripts/podcast-transcripts-website/blob/main/LICENCE"
+            "https://github.com/podcast-transcripts/podcast-transcriber/blob/main/LICENCE"
           }
         >
           GPL-3
