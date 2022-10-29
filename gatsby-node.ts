@@ -68,7 +68,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
         }
       }
     `);
-  results.data.dataJson.podcasts.forEach((podcast) => {
+  results.data?.dataJson.podcasts.forEach((podcast) => {
     createPage({
       path: `/podcasts/${podcast.podcast_id}`,
       component: path.resolve("./src/templates/podcast.tsx"),
