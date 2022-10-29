@@ -9,24 +9,22 @@ const IndexPage = ({
   data: {
     dataJson: { podcasts },
   },
-}: PageProps<GetPodcastTranscriptsResult>) => {
-  return (
-    <main>
-      <h1>hi</h1>
-      <ul>
-        {podcasts
-          .sort((a, b) => compareStrings(a.podcastTitle, b.podcastTitle))
-          .map((podcast) => (
-            <li>
-              <Link to={`podcasts/${podcast.podcastId}`}>
-                {podcast.podcastTitle}
-              </Link>
-            </li>
-          ))}
-      </ul>
-    </main>
-  );
-};
+}: PageProps<PageQueryResult>) => (
+  <main>
+    <h1>hi</h1>
+    <ul>
+      {podcasts
+        .sort((a, b) => compareStrings(a.podcastTitle, b.podcastTitle))
+        .map((podcast) => (
+          <li>
+            <Link to={`podcasts/${podcast.podcastId}`}>
+              {podcast.podcastTitle}
+            </Link>
+          </li>
+        ))}
+    </ul>
+  </main>
+);
 
 export const query = graphql`
   {
