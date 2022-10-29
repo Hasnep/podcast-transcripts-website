@@ -18,7 +18,12 @@ export type Podcast = {
   episodes: Episode[];
 };
 
-export type GetPodcastTranscriptsResult = {
+export type PageQueryResult = {
+  site: {
+    siteMetadata: {
+      siteTitle: string;
+    };
+  };
   dataJson: {
     podcasts: Podcast[];
   };

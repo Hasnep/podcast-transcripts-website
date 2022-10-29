@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GetPodcastTranscriptsResult } from "../types";
+import { PageQueryResult } from "../types";
 import { HeadFC, Link, graphql } from "gatsby";
 import "../styles.scss";
 import { PageProps } from "gatsby";
@@ -12,7 +12,7 @@ const AllEpisodesPage = ({
     dataJson: { podcasts },
   },
   pageContext,
-}: PageProps<GetPodcastTranscriptsResult, AllEpisodesPageContext>) => {
+}: PageProps<PageQueryResult, AllEpisodesPageContext>) => {
   const podcast = getPodcastFromId(podcasts, pageContext.podcastId);
   return (
     <main>
@@ -47,6 +47,11 @@ export default AllEpisodesPage;
 
 export const query = graphql`
   {
+    site {
+      siteMetadata {
+        siteTitle: title
+      }
+    }
     dataJson {
       podcasts {
         podcastId: podcast_id
@@ -67,4 +72,19 @@ export const query = graphql`
   }
 `;
 
-export const Head: HeadFC = () => <title>Podcast Page</title>;
+export const Head: HeadFC<PageQueryResult, AllEpisodesPageContext> = ({
+  data: {
+    site: {
+      siteMetadata: { siteTitle },
+    },
+    dataJson: { podcasts },
+  },
+  pageContext: { podcastId },
+}) => {
+  const podcast = getPodcastFromId(podcasts, podcastId);
+  return (
+    <title>
+      {siteTitle} — {podcast.podcastTitle} — All episodes
+    </title>
+  );
+};

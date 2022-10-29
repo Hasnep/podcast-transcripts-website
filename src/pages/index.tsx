@@ -3,7 +3,7 @@ import { HeadFC, Link } from "gatsby";
 import "../styles.scss";
 import { graphql, PageProps } from "gatsby";
 import { compareStrings } from "../utils";
-import { GetPodcastTranscriptsResult } from "../types";
+import { PageQueryResult } from "../types";
 
 const IndexPage = ({
   data: {
@@ -28,6 +28,11 @@ const IndexPage = ({
 
 export const query = graphql`
   {
+    site {
+      siteMetadata {
+        siteTitle: title
+      }
+    }
     dataJson {
       podcasts {
         podcastId: podcast_id
@@ -50,4 +55,10 @@ export const query = graphql`
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC<PageQueryResult> = ({
+  data: {
+    site: {
+      siteMetadata: { siteTitle },
+    },
+  },
+}) => <title>{siteTitle}</title>;

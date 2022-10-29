@@ -2,7 +2,7 @@ import * as React from "react";
 import { HeadFC, Link, graphql } from "gatsby";
 import "../styles.scss";
 import { PageProps } from "gatsby";
-import { GetPodcastTranscriptsResult } from "../types";
+import { PageQueryResult } from "../types";
 import { compareStrings, getPodcastFromId } from "../utils";
 
 type PodcastPageContext = { podcastId: string };
@@ -12,7 +12,7 @@ const PodcastPage = ({
     dataJson: { podcasts },
   },
   pageContext,
-}: PageProps<GetPodcastTranscriptsResult, PodcastPageContext>) => {
+}: PageProps<PageQueryResult, PodcastPageContext>) => {
   const podcast = getPodcastFromId(podcasts, pageContext.podcastId);
   return (
     <main>
@@ -43,6 +43,11 @@ export default PodcastPage;
 
 export const query = graphql`
   {
+    site {
+      siteMetadata {
+        siteTitle: title
+      }
+    }
     dataJson {
       podcasts {
         podcastId: podcast_id
@@ -63,4 +68,19 @@ export const query = graphql`
   }
 `;
 
-export const Head: HeadFC = () => <title>Podcast Page</title>;
+export const Head: HeadFC<PageQueryResult, PodcastPageContext> = ({
+  data: {
+    site: {
+      siteMetadata: { siteTitle },
+    },
+    dataJson: { podcasts },
+  },
+  pageContext: { podcastId },
+}) => {
+  const podcast = getPodcastFromId(podcasts, podcastId);
+  return (
+    <title>
+      {siteTitle} — {podcast.podcastTitle}
+    </title>
+  );
+};

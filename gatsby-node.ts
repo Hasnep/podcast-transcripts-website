@@ -1,33 +1,37 @@
 import type { GatsbyNode } from "gatsby";
-import type { GetPodcastTranscriptsResult } from "./src/types";
+import type { PageQueryResult } from "./src/types";
 import path from "path";
 
 export const createPages: GatsbyNode["createPages"] = async ({
   actions: { createPage },
   graphql,
 }) => {
-  const results: { data?: GetPodcastTranscriptsResult; errors?: any } =
-    await graphql(`
-      {
-        dataJson {
-          podcasts {
-            podcastId: podcast_id
-            podcastTitle: podcast_title
-            episodes {
-              episodeTitle: episode_title
-              slug: episode_slug
-              published
-              transcript {
-                segments {
-                  text
-                  timestamp
-                }
+  const results: { data?: PageQueryResult; errors?: any } = await graphql(`
+    {
+      site {
+        siteMetadata {
+          siteTitle: title
+        }
+      }
+      dataJson {
+        podcasts {
+          podcastId: podcast_id
+          podcastTitle: podcast_title
+          episodes {
+            episodeTitle: episode_title
+            slug: episode_slug
+            published
+            transcript {
+              segments {
+                text
+                timestamp
               }
             }
           }
         }
       }
-    `);
+    }
+  `);
   results.data?.dataJson.podcasts.forEach((podcast) => {
     createPage({
       path: `/podcasts/${podcast.podcastId}`,
