@@ -4,6 +4,7 @@ import "../styles.scss";
 import { PageProps } from "gatsby";
 import { PageQueryResult } from "../types";
 import { compareStrings, getPodcastFromId } from "../utils";
+import { Breadcrumbs } from "../components/breadcrumbs";
 
 type PodcastPageContext = { podcastId: string };
 
@@ -20,6 +21,7 @@ const PodcastPage = ({
   return (
     <main>
       <h1>{siteTitle}</h1>
+      <Breadcrumbs podcast={podcast} episode={null} isAllEpisodes={false} />
       <h2>{podcast.podcastTitle}</h2>
       <ul>
         <li>

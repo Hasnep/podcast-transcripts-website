@@ -5,6 +5,7 @@ import "../styles.scss";
 import { PageProps } from "gatsby";
 import { compareStrings, getPodcastFromId } from "../utils";
 import { Segments } from "../components/segments";
+import { Breadcrumbs } from "../components/breadcrumbs";
 
 type AllEpisodesPageContext = { podcastId: string };
 
@@ -21,6 +22,7 @@ const AllEpisodesPage = ({
   return (
     <main>
       <h1>{siteTitle}</h1>
+      <Breadcrumbs podcast={podcast} episode={null} isAllEpisodes={true} />
       <h2>{podcast.podcastTitle}</h2>
       {podcast.episodes
         .sort((a, b) => compareStrings(b.published, a.published))

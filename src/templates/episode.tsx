@@ -5,6 +5,7 @@ import { PageProps } from "gatsby";
 import { PageQueryResult } from "../types";
 import { compareStrings, getPodcastFromId, getEpisodeFromSlug } from "../utils";
 import { Segments } from "../components/segments";
+import { Breadcrumbs } from "../components/breadcrumbs";
 
 type EpisodePageContext = { podcastId: string; episodeSlug: string };
 
@@ -22,6 +23,7 @@ const EpisodePage = ({
   return (
     <main>
       <h1>{siteTitle}</h1>
+      <Breadcrumbs podcast={podcast} episode={episode} isAllEpisodes={false} />
       <h2>{podcast.podcastTitle}</h2>
       <h3>{episode.episodeTitle}</h3>
       <Segments podcast={podcast} episode={episode} />

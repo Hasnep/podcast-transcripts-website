@@ -21,3 +21,17 @@ ul.segments {
   padding: 0;
   margin: 0;
 }
+
+ul.breadcrumbs {
+  padding: 1rem 0.5rem;
+  list-style: none;
+
+  li {
+    display: inline;
+  }
+
+  li + li:before {
+    padding: 0.5rem;
+    content: ">";
+  }
+}
