@@ -4,11 +4,15 @@ import "../styles.scss";
 import { PageProps } from "gatsby";
 import { PageQueryResult } from "../types";
 import { compareStrings, getPodcastFromId, getEpisodeFromSlug } from "../utils";
+import { Segments } from "../components/segments";
 
 type EpisodePageContext = { podcastId: string; episodeSlug: string };
 
 const EpisodePage = ({
   data: {
+    site: {
+      siteMetadata: { siteTitle },
+    },
     dataJson: { podcasts },
   },
   pageContext: { podcastId, episodeSlug },
@@ -17,17 +21,10 @@ const EpisodePage = ({
   const episode = getEpisodeFromSlug(podcast.episodes, episodeSlug);
   return (
     <main>
-      <h1>{podcast.podcastTitle}</h1>
-      <h2>{episode.episodeTitle}</h2>
-      <>
-        {episode.transcript.segments
-          .sort((a, b) => compareStrings(a.timestamp, b.timestamp))
-          .map((segment) => (
-            <p>
-              {segment.timestamp} {segment.text}
-            </p>
-          ))}
-      </>
+      <h1>{siteTitle}</h1>
+      <h2>{podcast.podcastTitle}</h2>
+      <h3>{episode.episodeTitle}</h3>
+      <Segments podcast={podcast} episode={episode} />
     </main>
   );
 };

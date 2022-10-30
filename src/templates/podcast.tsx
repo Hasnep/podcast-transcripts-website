@@ -9,6 +9,9 @@ type PodcastPageContext = { podcastId: string };
 
 const PodcastPage = ({
   data: {
+    site: {
+      siteMetadata: { siteTitle },
+    },
     dataJson: { podcasts },
   },
   pageContext,
@@ -16,13 +19,14 @@ const PodcastPage = ({
   const podcast = getPodcastFromId(podcasts, pageContext.podcastId);
   return (
     <main>
-      <h1>{podcast.podcastTitle}</h1>
-      <p>
-        <Link to={`/podcasts/${podcast.podcastId}/all-episodes`}>
-          All episodes
-        </Link>
-      </p>
+      <h1>{siteTitle}</h1>
+      <h2>{podcast.podcastTitle}</h2>
       <ul>
+        <li>
+          <Link to={`/podcasts/${podcast.podcastId}/all-episodes`}>
+            All episodes
+          </Link>
+        </li>
         {podcast.episodes
           .sort((a, b) => compareStrings(b.published, a.published))
           .map((episode) => (

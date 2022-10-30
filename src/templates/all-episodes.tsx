@@ -4,11 +4,15 @@ import { HeadFC, Link, graphql } from "gatsby";
 import "../styles.scss";
 import { PageProps } from "gatsby";
 import { compareStrings, getPodcastFromId } from "../utils";
+import { Segments } from "../components/segments";
 
 type AllEpisodesPageContext = { podcastId: string };
 
 const AllEpisodesPage = ({
   data: {
+    site: {
+      siteMetadata: { siteTitle },
+    },
     dataJson: { podcasts },
   },
   pageContext,
@@ -16,27 +20,14 @@ const AllEpisodesPage = ({
   const podcast = getPodcastFromId(podcasts, pageContext.podcastId);
   return (
     <main>
-      <h1>{podcast.podcastTitle}</h1>
+      <h1>{siteTitle}</h1>
+      <h2>{podcast.podcastTitle}</h2>
       {podcast.episodes
         .sort((a, b) => compareStrings(b.published, a.published))
         .map((episode) => (
           <>
             <h2>{episode.episodeTitle}</h2>
-            <ul>
-              {episode.transcript.segments
-                .sort((a, b) => compareStrings(a.timestamp, b.timestamp))
-                .map((segment) => (
-                  <li>
-                    <Link
-                      to={`/podcasts/${podcast.podcastId}/episode/${episode.slug}`}
-                    >
-                      {segment.timestamp}
-                    </Link>
-                    {" - "}
-                    {segment.text}
-                  </li>
-                ))}
-            </ul>
+            <Segments podcast={podcast} episode={episode} />
           </>
         ))}
     </main>
